@@ -11,8 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebar.classList.toggle('collapsed');
     });
 
-    // Dentro de tu evento 'DOMContentLoaded'
-
     menuItems.forEach(item => {
         item.addEventListener('click', () => {
             // 1. Ocultar todas las páginas
