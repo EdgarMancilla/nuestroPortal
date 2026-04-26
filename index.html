@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png/webp/svg" href="fondoPinguinos.svg">
+    <title>Nuestro Portal</title>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDyrjOVgNrm6lNmwySxGPfxqWNyfFNOLMM",
+            authDomain: "nuestroportal-d445d.firebaseapp.com",
+            projectId: "nuestroportal-d445d",
+            storageBucket: "nuestroportal-d445d.firebasestorage.app",
+            messagingSenderId: "622950141493",
+            appId: "1:622950141493:web:09c86fcdc674176a31ab7c",
+            measurementId: "G-WT0R2G5QKM"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app); // <--- ESTO ES LO IMPORTANTE
+        const analytics = getAnalytics(app);
+
+        window.db = db; // Ahora script.js podrá acceder a db
+    </script>
+
+</head>
+
+<body>
+    <div class="app-container">
+        <nav class="sidebar" id="sidebar">
+            <div id="toggle-btn">≡ Menú</div>
+            <div class="user-header"><span>Hola Fulanit@</span></div>
+            <ul>
+                <li data-target="inicio"><span>Inicio</span></li>
+                <li data-target="galeria"><span>Nuestra galería</span></li>
+                <li data-target="planes"><span>Cosas por hacer</span></li>
+                <li data-target="notas"><span>Notas</span></li>
+            </ul>
+        </nav>
+        <!-- SECCION DE INCIO -->
+        <main class="content">
+            <section id="inicio" class="page">
+                <h1>Hola tonotos</h1>
+                <p>Este sitio esta hecho simplemente para que recuerden los momentos bonitos que han pasado en su
+                    relación, <br>
+                    aunque han sido varios y no de todos se tiene foto de recuerdo, aqui podran subir lo que
+                    quieran compartir al otro. <br>
+                    De igual forma pueden agregar cosas por hacer a la lista, para que tengan presentes los
+                    planes pendientes que tengan. <br>
+                    Y finalmente esta la sección de notas, para que ingresen cosas importantes o pequeños detalles
+                    que probablemente se puedan olvidar.</p>
+                <p>Este sitio es para ustedes, disfrútenlo y que viva el amogg.</p>
+            </section>
+            <!-- SECCION DE INCIO -->
+
+            <!-- SECCION DE GALERIA -->
+
+            <section id="galeria" class="page" style="display:none;">
+                <h1>Nuestra Galería</h1>
+
+                <div class="input-area">
+                    <input type="file" id="file-input" accept="image/*" style="display:none;">
+                    <button id="upload-btn">Subir nueva foto</button>
+                </div>
+
+                <div id="photo-grid" class="photo-grid"></div>
+            </section>
+
+            <!-- SECCION DE GALERIA -->
+
+            <!-- SECCION DE PLANES -->
+
+            <section id="planes" class="page" style="display:none;">
+                <h1>Nuestros planes</h1>
+
+                <div class="input-area">
+                    <input type="text" id="plan-input" placeholder="Escribe un nuevo plan...">
+                    <button id="add-plan-btn">Agregar</button>
+                </div>
+
+                <ul id="plan-list" class="todo-list">
+                </ul>
+            </section>
+            <!-- SECCION DE PLANES -->
+
+            <!-- SECCION DE NOTAS -->
+
+            <section id="notas" class="page" style="display:none;">
+                <h1>Notas importantes</h1>
+
+                <div class="note-input-area">
+                    <textarea id="note-text" placeholder="Escribe algo importante..." rows="4"></textarea>
+                    <button id="add-note-btn">Crear nota</button>
+                </div>
+
+                <div id="notes-grid" class="notes-grid">
+                </div>
+            </section>
+            <!-- SECCION DE NOTAS -->
+
+        </main>
+    </div>
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>

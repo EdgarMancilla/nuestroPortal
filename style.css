@@ -1,0 +1,264 @@
+/* --- TU DISEÑO ORIGINAL --- */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    height: 100vh;
+}
+
+.app-container {
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    width: 220px;
+    border-right: 1px solid #ddd;
+    padding: 20px;
+    background: #335192;
+    color: white;
+    /* Cambiado a blanco para que resalte sobre el azul */
+    transition: width 0.3s ease;
+    /* ANIMACIÓN FLUIDA */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-header {
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    white-space: nowrap;
+    /* Evita que el texto salte de línea al colapsar */
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin-bottom: 10px;
+    padding: 12px;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    color: #333;
+    /* Texto dentro de las cajas en gris oscuro */
+    white-space: nowrap;
+    /* Evita que el texto se rompa */
+    overflow: hidden;
+}
+
+.sidebar li:hover {
+    background: #eef;
+}
+
+.content {
+    padding: 40px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+h1 {
+    color: #333;
+}
+
+/* --- NUEVAS REGLAS PARA COLAPSAR --- */
+
+/* Cuando el menú se encoge */
+.sidebar.collapsed {
+    width: 60px;
+}
+
+/* Ocultar los textos (spans) cuando el menú está colapsado */
+.sidebar.collapsed span {
+    display: none;
+}
+
+/* Ajustar el botón de menú */
+#toggle-btn {
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.gallery-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.photo-grid {
+    display: grid;
+    /* Crea columnas automáticas de mínimo 200px */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 15px;
+    padding: 10px;
+}
+
+.photo-item {
+    background: #eee;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 250px;
+    /* Altura fija para uniformidad, o déjala auto para estilo real */
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Recorta la imagen para que llene el hueco sin deformarse */
+    transition: transform 0.3s;
+}
+
+.photo-item img:hover {
+    transform: scale(1.05);
+    /* Efecto pequeño al pasar el mouse */
+}
+
+
+
+.input-area {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+#plan-input {
+    padding: 10px;
+    flex-grow: 1;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.todo-list {
+    list-style: none;
+    padding: 0;
+}
+
+.todo-item {
+    background: white;
+    padding: 12px;
+    margin-bottom: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.todo-item.completed {
+    text-decoration: line-through;
+    background: #e0f7fa;
+    color: #888;
+}
+
+
+.note-input-area {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#note-text {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    resize: vertical;
+}
+
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+.note-card {
+    background: #fff3bf;
+    /* Color amarillo tipo post-it */
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    min-height: 120px;
+    word-wrap: break-word;
+    position: relative;
+}
+
+.note-card:hover {
+    transform: scale(1.02);
+}
+
+/* Asegura que el botón no se estire forzadamente */
+#upload-btn {
+    padding: 10px 20px;
+    cursor: pointer;
+    flex-grow: 0;
+    /* Evita que crezca para llenar el espacio */
+    white-space: nowrap;
+}
+
+/* Mejora el grid para que las fotos fluyan mejor */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+    /* Separación del botón */
+}
+
+/* --- ESTILO AMIGABLE PARA TODOS LOS BOTONES --- */
+button {
+    background-color: #335192;
+    /* Color azul de tu sidebar */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    /* Esto les da la forma redondeada */
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    /* Suaviza el cambio de color */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Sombra suave */
+}
+
+/* Efecto al pasar el mouse */
+button:hover {
+    background-color: #4a70c0;
+    /* Un azul un poco más claro */
+    transform: translateY(-2px);
+    /* El botón "salta" un poquito */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    /* Sombra más pronunciada */
+}
+
+/* Efecto al hacer clic */
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajuste específico para el botón de borrar en la lista de planes */
+.todo-item button {
+    background-color: #ff6b6b;
+    /* Un rojo suave para borrar */
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    border-radius: 15px;
+}
+
+.todo-item button:hover {
+    background-color: #ff4d4d;
+}
