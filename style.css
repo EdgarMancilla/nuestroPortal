@@ -262,3 +262,47 @@ button:active {
 .todo-item button:hover {
     background-color: #ff4d4d;
 }
+
+/* --- AJUSTES PARA MÓVILES --- */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+        /* Apila el menú y el contenido verticalmente */
+        height: auto;
+    }
+
+    .app-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        /* El menú ocupa todo el ancho */
+        height: auto;
+        padding: 10px;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .content {
+        padding: 15px;
+        /* Menos padding para aprovechar espacio */
+        font-size: 14px;
+        /* Texto un poco más pequeño para que sea legible */
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        /* Títulos más ajustados */
+    }
+
+    .photo-grid {
+        grid-template-columns: 1fr;
+        /* Una sola columna en móvil para que las fotos se vean grandes */
+    }
+
+    .photo-item {
+        height: 300px;
+        /* Un poco más de altura para fotos */
+    }
+}
