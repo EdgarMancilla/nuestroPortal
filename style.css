@@ -305,4 +305,27 @@ button:active {
         height: 300px;
         /* Un poco más de altura para fotos */
     }
+
+    .sidebar {
+        width: 100% !important;
+        /* Fuerza el ancho al 100% en todas las secciones */
+        min-height: 80px;
+        /* Define una altura mínima consistente */
+        flex: 0 0 auto;
+        /* Evita que el sidebar se encoja o estire */
+        box-sizing: border-box;
+        /* Asegura que el padding no afecte el ancho */
+    }
+
+    .app-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    /* Esto ayuda a que el área de contenido empiece justo debajo del menú siempre */
+    main {
+        flex: 1;
+        width: 100%;
+        overflow-x: hidden;
+    }
 }
