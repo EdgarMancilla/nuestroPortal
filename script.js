@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebar.classList.toggle('collapsed');
     });
 
+    // Dentro de tu evento 'DOMContentLoaded'
+
     menuItems.forEach(item => {
         item.addEventListener('click', () => {
             // 1. Ocultar todas las páginas
@@ -19,6 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
             // 2. Mostrar la página cuyo ID coincide con el data-target del botón
             const targetId = item.getAttribute('data-target');
             document.getElementById(targetId).style.display = 'block';
+
+            if (window.innerWidth <= 768) {
+                sidebar.classList.add('collapsed');
+            }
         });
     });
 
