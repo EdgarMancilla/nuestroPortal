@@ -263,69 +263,31 @@ button:active {
     background-color: #ff4d4d;
 }
 
-/* --- AJUSTES PARA MÓVILES --- */
+/* --- ESTILO PARA EL MENÚ COLAPSADO --- */
+.sidebar.collapsed {
+    width: 60px;
+    /* Tamaño reducido */
+}
+
+/* Ocultar el texto de los botones cuando está colapsado */
+.sidebar.collapsed li span {
+    display: none;
+}
+
+/* Ocultar los botones blancos en móvil si lo deseas */
 @media (max-width: 768px) {
-    body {
-        flex-direction: column;
-        /* Apila el menú y el contenido verticalmente */
-        height: auto;
+    .sidebar.collapsed ul {
+        display: none;
+        /* Esto oculta los botones cuando está colapsado */
     }
+}
 
-    .app-container {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        width: 100%;
-        /* El menú ocupa todo el ancho */
-        height: auto;
-        padding: 10px;
-        border-right: none;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .content {
-        padding: 15px;
-        /* Menos padding para aprovechar espacio */
-        font-size: 14px;
-        /* Texto un poco más pequeño para que sea legible */
-    }
-
-    h1 {
-        font-size: 1.5rem;
-        /* Títulos más ajustados */
-    }
-
-    .photo-grid {
-        grid-template-columns: 1fr;
-        /* Una sola columna en móvil para que las fotos se vean grandes */
-    }
-
-    .photo-item {
-        height: 300px;
-        /* Un poco más de altura para fotos */
-    }
-
-    .sidebar {
-        width: 100% !important;
-        /* Fuerza el ancho al 100% en todas las secciones */
-        min-height: 80px;
-        /* Define una altura mínima consistente */
-        flex: 0 0 auto;
-        /* Evita que el sidebar se encoja o estire */
-        box-sizing: border-box;
-        /* Asegura que el padding no afecte el ancho */
-    }
-
-    .app-container {
-        flex-direction: column;
-        height: auto;
-    }
-
-    /* Esto ayuda a que el área de contenido empiece justo debajo del menú siempre */
-    main {
-        flex: 1;
-        width: 100%;
-        overflow-x: hidden;
-    }
+/* Estilo para el botón de hamburguesa */
+#toggle-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
 }
