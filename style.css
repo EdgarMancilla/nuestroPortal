@@ -263,31 +263,50 @@ button:active {
     background-color: #ff4d4d;
 }
 
-/* --- ESTILO PARA EL MENÚ COLAPSADO --- */
-.sidebar.collapsed {
-    width: 60px;
-    /* Tamaño reducido */
-}
-
-/* Ocultar el texto de los botones cuando está colapsado */
-.sidebar.collapsed li span {
-    display: none;
-}
-
-/* Ocultar los botones blancos en móvil si lo deseas */
+/* --- DISEÑO MÓVIL OPTIMIZADO (Navbar Superior) --- */
 @media (max-width: 768px) {
-    .sidebar.collapsed ul {
-        display: none;
-        /* Esto oculta los botones cuando está colapsado */
+    body {
+        flex-direction: column;
+        /* Contenido debajo del menú */
     }
-}
 
-/* Estilo para el botón de hamburguesa */
-#toggle-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    margin-bottom: 20px;
+    .sidebar {
+        width: 100% !important;
+        height: 60px;
+        /* Barra delgada arriba */
+        flex-direction: row;
+        /* Elementos en horizontal */
+        align-items: center;
+        padding: 0 15px;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        border-right: none;
+        border-bottom: 2px solid #2a4175;
+    }
+
+    .sidebar ul {
+        display: flex;
+        gap: 10px;
+        margin: 0;
+        overflow-x: auto;
+        /* Permite deslizar el menú si hay muchos botones */
+        white-space: nowrap;
+    }
+
+    .sidebar li {
+        margin-bottom: 0;
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+
+    .user-header {
+        display: none;
+        /* Ocultamos el saludo en móvil para ahorrar espacio */
+    }
+
+    #toggle-btn {
+        display: none;
+        /* Ya no necesitamos el botón de hamburguesa */
+    }
 }
