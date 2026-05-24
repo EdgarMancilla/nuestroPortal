@@ -32,7 +32,8 @@ body {
     align-items: center;
     padding: 0 16px;
     box-sizing: border-box;
-    z-index: 100;
+    z-index: 200;
+    /* Aumentado para estar por encima de todo */
 }
 
 .navbar-left {
@@ -81,18 +82,19 @@ body {
 .app-container {
     display: flex;
     margin-top: 56px;
-    /* Espacio para la navbar fija */
     height: calc(100vh - 56px);
+    position: relative;
 }
 
-/* --- SIDEBAR ESTILO MENÚ IZQUIERDO --- */
+/* --- SIDEBAR ESCRITORIO --- */
 .sidebar {
     width: 280px;
-    background: transparent;
+    background: var(--fb-bg);
     padding: 16px 8px;
-    transition: width 0.3s ease;
-    overflow: hidden;
+    transition: width 0.3s ease, transform 0.3s ease;
+    overflow-hidden: auto;
     box-sizing: border-box;
+    z-index: 150;
 }
 
 .sidebar ul {
@@ -127,7 +129,7 @@ body {
     text-align: center;
 }
 
-/* Sidebar colapsada */
+/* Sidebar colapsada en Escritorio */
 .sidebar.collapsed {
     width: 60px;
 }
@@ -144,16 +146,16 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* Centra el contenido como el feed de FB */
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .page {
     width: 100%;
     max-width: 680px;
-    /* Ancho estándar de un post/feed */
 }
 
-/* --- TARJETAS ESTILO POST DE FACEBOOK --- */
+/* --- TARJETAS ESTILO POST --- */
 .fb-card {
     background-color: var(--fb-card-bg);
     border-radius: 8px;
@@ -203,6 +205,8 @@ body {
     outline: none;
     transition: border 0.2s;
     font-family: inherit;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 #note-text {
@@ -216,7 +220,7 @@ body {
     background-color: var(--fb-card-bg);
 }
 
-/* --- BOTONES PRINCIPALES --- */
+/* --- BOTONES --- */
 button.fb-btn-primary {
     background-color: var(--fb-blue);
     color: white;
@@ -228,22 +232,17 @@ button.fb-btn-primary {
     font-size: 0.9rem;
     cursor: pointer;
     transition: background 0.2s;
-    box-shadow: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    white-space: nowrap;
 }
 
 button.fb-btn-primary:hover {
     background-color: #166fe5;
-    transform: none;
 }
 
-button.fb-btn-primary:active {
-    background-color: #1466d4;
-}
-
-/* --- LISTA DE PLANES (TODOS) --- */
+/* --- LISTA DE PLANES --- */
 .todo-list {
     list-style: none;
     padding: 0;
@@ -262,6 +261,12 @@ button.fb-btn-primary:active {
     align-items: center;
     cursor: pointer;
     font-weight: 500;
+    gap: 10px;
+}
+
+.todo-item span {
+    word-break: break-word;
+    /* Evita que textos largos rompan el diseño */
 }
 
 .todo-item.completed {
@@ -283,13 +288,10 @@ button.fb-btn-primary:active {
     cursor: pointer;
     font-size: 0.8rem;
     padding: 0;
+    flex-shrink: 0;
 }
 
-.todo-item button:hover {
-    background-color: #d8dadf;
-}
-
-/* --- GALERÍA DE FOTOS --- */
+/* --- GRID DE FOTOS --- */
 .photo-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -310,15 +312,9 @@ button.fb-btn-primary:active {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: opacity 0.2s;
 }
 
-.photo-item img:hover {
-    opacity: 0.9;
-    transform: none;
-}
-
-/* --- SECCIÓN DE NOTAS (MURO GRIDS) --- */
+/* --- GRID DE NOTAS --- */
 .notes-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -339,9 +335,75 @@ button.fb-btn-primary:active {
     text-align: center;
     font-size: 1rem;
     font-weight: 500;
+    word-break: break-word;
 }
 
-.note-card:hover {
-    transform: none;
-    background-color: var(--fb-bg);
+/* ==========================================================================
+   📱 ADAPTACIÓN PARA MÓVILES (MEDIA QUERY)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+
+    /* Escondemos el nombre del usuario para liberar espacio arriba */
+    .user-name {
+        display: none;
+    }
+
+    /* El Sidebar pasa a ser un menú lateral flotante tipo App Móvil */
+    .sidebar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 260px;
+        background-color: var(--fb-card-bg);
+        box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+        transform: translateX(0);
+        /* Abierto por defecto */
+        transition: transform 0.3s ease;
+    }
+
+    /* Cuando en JS se añade '.collapsed', en móvil significa CERRADO */
+    .sidebar.collapsed {
+        transform: translateX(-110%);
+        width: 260px;
+        /* Mantiene su ancho interno al ocultarse */
+    }
+
+    /* Forzamos a que los textos internos del menú siempre se vean si el menú está abierto */
+    .sidebar.collapsed span:not(.icon) {
+        display: inline;
+    }
+
+    /* Reducimos el padding en pantallas móviles para el muro */
+    .content {
+        padding: 16px 8px;
+    }
+
+    /* Ajuste para que los botones y cajas de texto no se aplasten */
+    .input-area {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    /* Grids de Fotos y Notas optimizados a 2 columnas fijas en pantallas pequeñas */
+    .photo-grid,
+    .notes-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+    }
+
+    .photo-item {
+        height: 160px;
+        /* Un poco más bajas para que quepan bien de dos en dos */
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* En teléfonos muy pequeños, las notas y fotos pasan a 1 sola columna vertical */
+    .photo-grid,
+    .notes-grid {
+        grid-template-columns: 1fr;
+    }
 }
