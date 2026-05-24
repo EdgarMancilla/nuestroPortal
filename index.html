@@ -23,86 +23,94 @@
         };
 
         const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app); // <--- ESTO ES LO IMPORTANTE
+        const db = getFirestore(app);
         const analytics = getAnalytics(app);
 
-        window.db = db; // Ahora script.js podrá acceder a db
+        window.db = db; 
     </script>
-
 </head>
 
 <body>
+    <header class="fb-navbar">
+        <div class="navbar-left">
+            <div id="toggle-btn" class="fb-toggle">≡</div>
+            <span class="fb-logo">nuestroPortal</span>
+        </div>
+        <div class="navbar-right">
+            <div class="user-pill">
+                <span class="user-avatar">👤</span>
+                <span class="user-name">Fulanit@</span>
+            </div>
+        </div>
+    </header>
+
     <div class="app-container">
         <nav class="sidebar" id="sidebar">
-            <div id="toggle-btn">≡ Menú</div>
-            <div class="user-header"><span>Hola Fulanit@</span></div>
             <ul>
-                <li data-target="inicio"><span>Inicio</span></li>
-                <li data-target="galeria"><span>Nuestra galería</span></li>
-                <li data-target="planes"><span>Cosas por hacer</span></li>
-                <li data-target="notas"><span>Notas</span></li>
+                <li data-target="inicio" class="active">
+                    <span class="icon">🏠</span> <span>Inicio</span>
+                </li>
+                <li data-target="galeria">
+                    <span class="icon">🖼️</span> <span>Nuestra galería</span>
+                </li>
+                <li data-target="planes">
+                    <span class="icon">📅</span> <span>Cosas por hacer</span>
+                </li>
+                <li data-target="notas">
+                    <span class="icon">📝</span> <span>Notas importantes</span>
+                </li>
             </ul>
         </nav>
-        <!-- SECCION DE INCIO -->
-        <main class="content">
-            <section id="inicio" class="page">
-                <h1>Hola tonotos</h1>
-                <p>Este sitio esta hecho simplemente para que recuerden los momentos bonitos que han pasado en su
-                    relación, <br>
-                    aunque han sido varios y no de todos se tiene foto de recuerdo, aqui podran subir lo que
-                    quieran compartir al otro. <br>
-                    De igual forma pueden agregar cosas por hacer a la lista, para que tengan presentes los
-                    planes pendientes que tengan. <br>
-                    Y finalmente esta la sección de notas, para que ingresen cosas importantes o pequeños detalles
-                    que probablemente se puedan olvidar.</p>
-                <p>Este sitio es para ustedes, disfrútenlo y que viva el amogg.</p>
-            </section>
-            <!-- SECCION DE INCIO -->
 
-            <!-- SECCION DE GALERIA -->
+        <main class="content">
+
+            <section id="inicio" class="page fb-card">
+                <div class="card-header">
+                    <h3>¡Bienvenidos a su espacio!</h3>
+                </div>
+                <p>Este sitio está hecho simplemente para que recuerden los momentos bonitos que han pasado en su
+                    relación, aunque han sido varios y no de todos se tiene foto de recuerdo, aquí podrán subir lo que
+                    quieran compartir al otro.</p>
+                <p>De igual forma pueden agregar cosas por hacer a la lista, para que tengan presentes los planes
+                    pendientes que tengan.</p>
+                <p>Y finalmente está la sección de notas, para que ingresen cosas importantes o pequeños detalles que
+                    probablemente se puedan olvidar.</p>
+                <p class="fb-footer-text">Este sitio es para ustedes, disfrútenlo y que viva el amogg. ❤️</p>
+            </section>
 
             <section id="galeria" class="page" style="display:none;">
-                <h1>Nuestra Galería</h1>
-
-                <div class="input-area">
-                    <input type="file" id="file-input" accept="image/*" style="display:none;">
-                    <button id="upload-btn">Subir nueva foto</button>
+                <div class="fb-card input-card">
+                    <h3>Nuestra Galería</h3>
+                    <div class="input-area">
+                        <input type="file" id="file-input" accept="image/*" style="display:none;">
+                        <button id="upload-btn" class="fb-btn-primary">➕ Subir nueva foto</button>
+                    </div>
                 </div>
-
                 <div id="photo-grid" class="photo-grid"></div>
             </section>
 
-            <!-- SECCION DE GALERIA -->
-
-            <!-- SECCION DE PLANES -->
-
             <section id="planes" class="page" style="display:none;">
-                <h1>Nuestros planes</h1>
-
-                <div class="input-area">
-                    <input type="text" id="plan-input" placeholder="Escribe un nuevo plan...">
-                    <button id="add-plan-btn">Agregar</button>
+                <div class="fb-card input-card">
+                    <h3>Nuestros planes</h3>
+                    <div class="input-area">
+                        <input type="text" id="plan-input" placeholder="¿Qué haremos después?...">
+                        <button id="add-plan-btn" class="fb-btn-primary">Agregar</button>
+                    </div>
                 </div>
-
-                <ul id="plan-list" class="todo-list">
-                </ul>
+                <ul id="plan-list" class="todo-list"></ul>
             </section>
-            <!-- SECCION DE PLANES -->
-
-            <!-- SECCION DE NOTAS -->
 
             <section id="notas" class="page" style="display:none;">
-                <h1>Notas importantes</h1>
-
-                <div class="note-input-area">
-                    <textarea id="note-text" placeholder="Escribe algo importante..." rows="4"></textarea>
-                    <button id="add-note-btn">Crear nota</button>
+                <div class="fb-card input-card">
+                    <h3>Notas importantes</h3>
+                    <div class="note-input-area">
+                        <textarea id="note-text" placeholder="Escribe algo que no quieras olvidar..."
+                            rows="3"></textarea>
+                        <button id="add-note-btn" class="fb-btn-primary">Crear nota</button>
+                    </div>
                 </div>
-
-                <div id="notes-grid" class="notes-grid">
-                </div>
+                <div id="notes-grid" class="notes-grid"></div>
             </section>
-            <!-- SECCION DE NOTAS -->
 
         </main>
     </div>
