@@ -407,3 +407,89 @@ button.fb-btn-primary:hover {
         grid-template-columns: 1fr;
     }
 }
+
+/* --- ESTILOS DEL MODAL (VISTA AMPLIADA) --- */
+.modal {
+    display: none;
+    /* Oculto por defecto */
+    position: fixed;
+    z-index: 1000;
+    /* Por encima de la navbar y el sidebar */
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Fondo negro con opacidad */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Contenedor de la imagen ampliada */
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 80vh;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    object-fit: contain;
+    /* Mantiene la proporción de la foto sin cortarla */
+    animation: zoomIn 0.25s ease;
+    /* Efecto suave de apertura */
+}
+
+/* Animación de zoom */
+@keyframes zoomIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Botón de cerrar (X) */
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: var(--fb-blue);
+}
+
+/* Cambios para que las miniaturas de la galería inviten a hacer clic */
+.photo-item {
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.photo-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 768px) {
+    .modal-content {
+        max-width: 95%;
+    }
+
+    .modal-close {
+        top: 15px;
+        right: 25px;
+        font-size: 35px;
+    }
+}
